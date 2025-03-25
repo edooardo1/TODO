@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NewTaskForm.css';
 
-const NewTaskForm = () => {
+const NewTaskForm = ({ addTask }) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputValue.trim()) {
+      addTask(inputValue);
+      setInputValue('');
+    }
+  };
+
   return (
-    <input
-      className="new-todo"
-      placeholder="What needs to be done?"
-      autoFocus
-    />
+    <form onSubmit={handleSubmit}>
+      <input
+        className="new-todo"
+        placeholder="What needs to be done?"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        autoFocus
+      />
+    </form>
   );
 };
 
