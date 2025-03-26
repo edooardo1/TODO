@@ -1,14 +1,27 @@
-import React, { Component } from 'react';
-import './TasksFilter.css';
+import React from 'react';
+import './TasksFilter.css'
 
-export default class TasksFilter extends Component{
-  render(){
-    return (
-      <ul className="filters">
-        <li><button className="selected">All</button></li>
-        <li><button>Active</button></li>
-        <li><button>Completed</button></li>
-      </ul>
-    );  
-  }
-}
+const TasksFilter = ({ currentFilter, setFilter }) => {
+  const filters = [
+    { id: 'all', label: 'All' },
+    { id: 'active', label: 'Active' },
+    { id: 'completed', label: 'Completed' }
+  ];
+
+  return (
+    <ul className="filters">
+      {filters.map(({ id, label }) => (
+        <li key={id}>
+          <button
+            className={currentFilter === id ? 'selected' : ''}
+            onClick={() => setFilter(id)}
+          >
+            {label}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default TasksFilter;
